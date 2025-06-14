@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уровни</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Уровень из первого скрина (Amethyst Wave) -->
+        <div class="level" onclick="showInfo('Amethyst Wave', 'Amethyst', '109', 'Этот уровень уже прошли!')">
+            <h3>✔ #1 - Amethyst Wave</h3>
+            <p>or Amethyst | ID: 109</p>
+        </div>
+
+        <!-- Уровень из второго скрина (UnMaded) -->
+        <div class="level" onclick="showInfo('UnMaded', 'Nazorro_', '327', 'Этот уровень ещё никто не прошёл...')">
+            <h3>UnMaded</h3>
+            <p>Верифер: Nazorro_</p>
+        </div>
+
+        <!-- Добавьте другие уровни по аналогии -->
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">×</span>
+            <h2 id="title"></h2>
+            <p><strong>Верифер:</strong> <span id="verifier"></span></p>
+            <p><strong>ID:</strong> <span id="id"></span></p>
+            <p><strong>Статус:</strong> <span id="status"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
