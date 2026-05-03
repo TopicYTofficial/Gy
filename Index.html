@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Строки</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: transparent;           /* прозрачный фон */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      /* Клик по прозрачному фону закроет Web App */
+    }
+    .card {
+      background: var(--tg-theme-bg-color, #ffffff);
+      color: var(--tg-theme-text-color, #000000);
+      padding: 20px;
+      border-radius: 16px;
+      max-width: 90%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: left;
+    }
+    .title { font-weight: bold; font-size: 18px; margin-bottom: 8px; }
+    .subtitle { font-size: 14px; margin-bottom: 14px; }
+    .list-item { margin: 6px 0; font-size: 15px; }
+  </style>
+</head>
+<body onclick="document.body.style.pointerEvents='none'; setTimeout(()=>window.Telegram.WebApp.close(), 20);">
+  <div class="card" onclick="event.stopPropagation();">
+    <div class="title" id="title"></div>
+    <div class="subtitle" id="subtitle"></div>
+    <div id="texts"></div>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    // Получаем строки из параметров URL (передаёт бот)
+    const params = new URLSearchParams(tg.initDataUnsafe?.start_param || window.location.search);
+    const item1 = params.get('t1') || '—';
+    const item2 = params.get('t2') || '—';
+    const item3 = params.get('t3') || '—';
+
+    document.getElementById('title').innerText = 'NightNull';
+    document.getElementById('subtitle').innerText = 'Ты — 🎉 Владелец строк.\nЗдесь твои загадочные фразы:\n\nТЕКСТЫ';
+    const list = document.getElementById('texts');
+    [item1, item2, item3].forEach(t => {
+      const p = document.createElement('div');
+      p.className = 'list-item';
+      p.innerText = `- ${t}`;
+      list.appendChild(p);
+    });
+    // Клик по прозрачному фону (body) закрывает приложение
+    document.body.addEventListener('click', () => {
+      tg.close();
+    });
+  </script>
+</body>
+</html>
